@@ -161,7 +161,7 @@ footer b{color:var(--fg)}
 <nav aria-label="Sections"><div class="chips"><a href="#scores">Scores</a><a href="#recaps">Recaps</a><a href="#awards">Awards</a><a href="#power">Power</a><a href="#luck">Luck</a><a href="#standings">Standings</a><a href="#waivers">Waivers</a><a href="#trades">Trades</a><a href="#season">Season</a><a href="#next">Week 10</a></div></nav>
 <section style="padding-top:12px">
   <span class="kicker">Week 9 · Press Box Exclusive</span>
-  <h1>Sutton Benched. Boswell Cut. Blake Cooked.</h1>
+  <h1>Sutton Benched, Boswell Cut, Season on Fire</h1>
   <p class="lede">Sutton my Boswell is named after Courtland Sutton and Chris Boswell. On Nov 4, Blake dropped Boswell. On Sunday, Blake benched Sutton (15.5) and started Brian Thomas Jr. at FLEX for 0.0. Sutton my Boswell lost by 37.46 and fell six spots in the power rankings. Elsewhere, Nix in 4!!! posted the second-highest score of the week and lost anyway.</p>
 </section>
 
@@ -201,6 +201,20 @@ footer b{color:var(--fg)}
 </div>
 
 <script>
+(function(){
+  /* Always open at the top with a clean URL: drop any #section on load, and jump to
+     sections on click without writing a #hash into the address bar. */
+  if('scrollRestoration' in history)history.scrollRestoration='manual';
+  if(location.hash)history.replaceState(null,'',location.pathname+location.search);
+  window.scrollTo(0,0);
+  window.addEventListener('pageshow',function(){window.scrollTo(0,0)});
+  document.addEventListener('click',function(e){
+    var a=e.target.closest('a[href^="#"]');if(!a)return;
+    var t=document.getElementById(a.getAttribute('href').slice(1));if(!t)return;
+    e.preventDefault();
+    t.scrollIntoView({behavior:matchMedia('(prefers-reduced-motion: reduce)').matches?'auto':'smooth',block:'start'});
+  });
+})();
 (function(){
   /* scrollspy: highlight the section in view and keep its tab visible in the strip */
   var bar=document.querySelector('nav .chips'),links=[].slice.call(bar.querySelectorAll('a')),cur=null;
